@@ -1,0 +1,17 @@
+{
+  "name": "hashingencryptionservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SabrinaO",
+  "license": "ISC",
+  "dependencies": {
+    "bm-pre": "0.0.2",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "express": "^4.16.4"
+  }
+}

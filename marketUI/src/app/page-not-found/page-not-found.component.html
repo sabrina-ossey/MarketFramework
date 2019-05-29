@@ -1,0 +1,66 @@
+<div>
+  <br>
+    <div class="container">
+        <div class="container">
+          <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+              <div class="blocks">
+                  <button button="submit" mat-raised-button color="primary">
+                      <mat-icon>add</mat-icon> Add
+                  </button>
+              </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card" >
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Audit History</h3>
+          </mat-card-title>
+          <mat-card-content>
+              <div class="example-container mat-elevation-z8">
+
+                  <mat-table #table [dataSource]="dataSource">
+
+                  <ng-container matColumnDef="monitoredData">
+                    <mat-header-cell *matHeaderCellDef> Monitored Data </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.monitoredData}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="hash">
+                    <mat-header-cell *matHeaderCellDef> Hashed Data </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.hash}} </mat-cell>
+                  </ng-container>
+
+                    <ng-container matColumnDef="uri">
+                      <mat-header-cell *matHeaderCellDef> Node URI </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.uri}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="proof">
+                      <mat-header-cell *matHeaderCellDef> Proofs </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.proof}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="anchorsId">
+                      <mat-header-cell *matHeaderCellDef>Anchors Identifiers </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.anchorsId}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="verified">
+                      <mat-header-cell *matHeaderCellDef> Verification Status </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.verified}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="verifiedAt">
+                      <mat-header-cell *matHeaderCellDef> Verification Date</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.verifiedAt}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                  </mat-table>
+                </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="board-inner" id="status-buttons">
+    <ul class="nav nav-tabs" id="myTab">
+        <div class="liner"></div>
+
+        <!-- circular user icon -->
+        <li>
+            <a routerLink="/serviceProvider" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="dataServiceProvider">
+                <span class="round-tabs one">
+                    <i class="glyphicon glyphicon-search"></i>
+                </span>
+            </a>
+        </li>
+        <a class="nav-item nav-link active" [routerLink]="['/serviceProvider']">Service Provider</a>
+        <a class="nav-item nav-link active" [routerLink]="['/catalogue']">Asset Catalogue</a>
+
+        <!-- circular tasks icon -->
+         <li>
+            <a routerLink="/agreementCreation" routerLinkActive="active" data-toggle="tab" title="dataAgreementCreation">
+                <span class="round-tabs two">
+                    <i class="glyphicon glyphicon-folder-open"></i>
+                </span>
+            </a>
+        </li>
+
+        <!-- circular home icon -->
+        <li>
+            <a routerLink="/catalogue" routerLinkActive="active" data-toggle="tab" title="dataCatalogue">
+                <span class="round-tabs three">
+                    <i class="glyphicon glyphicon-eye-close"></i>
+                </span>
+            </a>
+        </li>
+
+    </ul>
+    <div class="clearfix"></div>
+</div>
+
+<!-- Close the Splash screen -->
+<script src="content/js/loading-bars.js"></script>

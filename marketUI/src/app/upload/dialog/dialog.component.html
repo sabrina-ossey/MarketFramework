@@ -1,0 +1,9 @@
+<input type="file" (change)="onFileSelected($event)"/>
+<h1 mat-dialog-title>Upload Files</h1>
+<div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+
+<mat-dialog-actions class="actions">
+<button mat-raised-button color="primary" (click)="onUpload()">Upload</button>
+<button mat-raised-button color="primary" *ngIf="finishLoad" mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+</div>

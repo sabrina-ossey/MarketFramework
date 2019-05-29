@@ -1,0 +1,32 @@
+.container {
+  display: block;
+  width: 70%;
+  margin: 20px auto 0 auto;
+  background: #fff;
+  height: 400vh;
+}
+
+.go {
+    flex: 1 1 auto;
+    order: 3;
+    min-width: 50px;
+    height: 30px;
+    display: inline-block;
+    transition: all 0.05s ease-in-out;
+    font-size: 21px;
+    outline: none;
+  }
+
+  .search {
+      flex: 1 1 auto;
+      order: 2;
+      outline: none;
+      border-radius: 0;
+      background: #fff;
+      padding: 20px;
+      font-family: 'Roboto', sans-serif;
+      height: 30px;
+      min-width: 50px;
+      transition: all 0.05s ease-in-out;
+      -webkit-appearance: none;
+    }

@@ -1,0 +1,25 @@
+
+
+<main>
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-xs-12 col-sm-9">
+                <div class="jumbotron">
+                <h2>SERVICE PROVIDERS</h2>
+                <ul class="providers">
+                  <li *ngFor="let provider of providers$ | async"
+                    [class.selected]="provider.id === selectedId">
+                    <a [routerLink]="['/serviceProviderDataUpload', provider.id ]">
+                      <span class="badge">{{ provider.id}}</span>{{ provider.name}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+                <router-outlet></router-outlet>
+            </div>
+            <router-outlet name="sidemenu"></router-outlet>
+        </div>
+    </div>
+</main>
+
+<!--router-outlet></router-outlet-->

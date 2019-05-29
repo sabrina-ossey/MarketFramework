@@ -1,0 +1,8 @@
+<h2>DATA ASSET INFORMATION</h2>
+<div *ngIf="dataAsset| async as dataAsset">
+  <h3>"{{ dataAsset.description }}"</h3>
+  <div>
+    <label>Id: </label>{{ dataAsset.id }}</div>
+  <div>
+    <label>Name: </label>{{ dataAsset.description }}</div>
+</div>

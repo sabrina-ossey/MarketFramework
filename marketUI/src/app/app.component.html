@@ -1,0 +1,52 @@
+    <mat-toolbar color="primary">
+     <div fxHide.gt-xs>
+       <button mat-icon-button (click)= "sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+     <div>
+       <a routerLink="/">
+          Data Marketplace
+       </a>
+     </div>
+     <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
+        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+            <li>
+                <a>
+                  <mat-icon class="icon">input</mat-icon>
+                  <span  class="label">Login</span>
+                 </a>
+            </li>
+            <li>
+              <a mat-list-item
+                 routerLink="/dataAssetManagement">
+                  <mat-icon class="icon">home</mat-icon>
+                  <span class="label">Data Asset</span>
+              </a>
+            </li>
+            <li>
+                <a mat-list-item
+                   routerLink="/dashboard">
+                    <mat-icon class="icon">dashboard</mat-icon>
+                    <span class="label">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                  <a mat-list-item
+                     routerLink="/agreement">
+                      <mat-icon class="icon">agreement</mat-icon>
+                      <span class="label">Agreement</span>
+                  </a>
+                </li>
+            <li>
+                <a>
+                  <mat-icon class="icon">input</mat-icon>
+                  <span class="label">LogOut</span>
+                 </a>
+            </li>
+        </ul>
+     </div>
+    </mat-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>

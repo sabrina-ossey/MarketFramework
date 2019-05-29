@@ -1,0 +1,13 @@
+{
+  "url": "https://company.zendesk.com/api/v2/slas/policies/25.json",
+  "id": 25,
+  "title": "Silver Plan",
+  "description": "Organizations: Silver Plan",
+  "position": 3,
+  "filter": "SLA",
+  "Data Provider": "Sabrina",
+  "Agreement Type": "Data Exchange",
+  "policy_metrics": "Connection",
+  "updated_at": "2015-03-17T22:50:26Z",
+  "created_at": "2015-03-17T22:50:26Z"
+}

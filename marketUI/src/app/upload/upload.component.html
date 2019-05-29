@@ -1,0 +1,10 @@
+<div *ngIf="provider$ | async as provider">
+  <h3> Service Provider: {{ provider.name }} </h3>
+  <div>
+    <label>Id: </label>{{ provider.id }}</div>
+  <div>
+    <label>Name: </label>{{ provider.name }}</div>
+  </div>
+  <p>
+
+<button mat-raised-button (click)="openUploadDialog()">Upload Data Model</button>
