@@ -1,0 +1,22 @@
+[
+  {
+    "domainid": "Do00003",
+    "domaintitle": "utility",
+    "domaindescription": "utility data"
+  },
+  {
+    "domainid": "Do00004",
+    "domaintitle": "payment",
+    "domaindescription": "payment"
+  },
+  {
+    "domainid": "Do00005",
+    "domaintitle": "transportation",
+    "domaindescription": "transportation data"
+  },
+  {
+    "domainid": "Do00006",
+    "domaintitle": "marketing",
+    "domaindescription": "marketing data"
+  }
+]

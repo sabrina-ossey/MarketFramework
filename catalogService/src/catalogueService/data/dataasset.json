@@ -1,0 +1,65 @@
+[
+  {
+    "dataid": "Da00003",
+    "datatitle": "electricity_data",
+    "datadescription": "electricity consumption data",
+    "format": "JSON",
+    "datacontent": "personal_Data",
+  	"datastaticity": "dynamic",
+  	"datasensitivity": "sensitive"
+  },
+  {
+    "dataid": "Da00004",
+    "datatitle": "credit_card_transactions",
+    "datadescription": "credit card transactions",
+    "format": "JSON",
+    "datacontent": "personal_Data",
+  	"datastaticity": "dynamic",
+  	"datasensitivity": "sensitive"
+  },
+  {
+    "dataid": "Da00005",
+    "datatitle": "electricity_consumption",
+    "datadescription": "electricity consumption of Geneva city",
+    "format": "JSON",
+    "datacontent": "non_personal_Data",
+  	"datastaticity": "dynamic",
+  	"datasensitivity": "non_sensitive"
+  },
+  {
+    "dataid": "Da00006",
+    "datatitle": "bus_transportation_data",
+    "datadescription": "bus transportation data in Geneva",
+    "format": "JSON",
+    "datacontent": "non_personal_Data",
+  	"datastaticity": "dynamic",
+  	"datasensitivity": "non_sensitive"
+  },
+  {
+    "dataid": "Da00007",
+    "datatitle": "taxi_transportation_data",
+    "datadescription": "personal bus transportation data in Geneva",
+    "format": "JSON",
+    "datacontent": "personal Data",
+  	"datastaticity": "dynamic",
+  	"datasensitivity": "sensitive"
+  },
+  {
+    "dataid": "Da00008",
+    "datatitle": "loyalty_scheme",
+    "datadescription": "customer loyalty scheme",
+    "format": "JSON",
+    "datacontent": "personal Data",
+  	"datastaticity": "dynamic",
+  	"datasensitivity": "sensitive"
+  },
+  {
+    "dataid": "Da00009",
+    "datatitle": "restaurant_location_data",
+    "datadescription": "restaurant location data in Geneva in 2018",
+    "format": "JSON",
+    "datacontent": "non_personal_Data",
+  	"datastaticity": "static",
+  	"datasensitivity": "non_sensitive"
+  }
+]

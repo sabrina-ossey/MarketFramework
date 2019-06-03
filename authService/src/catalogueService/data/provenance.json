@@ -1,0 +1,30 @@
+[
+  {
+    "serviceprovider_name": "Roldan",
+    "product_datatitle": "electricity_data"
+  },
+  {
+    "serviceprovider_name": "Cob",
+    "product_datatitle": "credit_card_transactions"
+  },
+  {
+    "serviceprovider_name": "Roldan",
+    "product_datatitle": "electricity_consumption"
+  },
+  {
+    "serviceprovider_name": "Olag",
+    "product_datatitle": "bus_transportation_data"
+  },
+  {
+    "serviceprovider_name": "Mandie",
+    "product_datatitle": "taxi_transportation_data"
+  },
+  {
+    "serviceprovider_name": "Elenor",
+    "product_datatitle": "loyalty_scheme"
+  },
+  {
+    "serviceprovider_name": "Elenor",
+    "product_datatitle": "restaurant_location_data"
+  }
+]

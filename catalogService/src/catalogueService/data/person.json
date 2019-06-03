@@ -1,0 +1,92 @@
+[
+  {
+    "identity": "I00002",
+    "name": "Melli",
+    "persondescription": "data provider",
+    "contact": "+7 171 898 0853"
+  },
+  {
+    "identity": "I00003",
+    "name": "Celinda",
+    "persondescription": "data provider",
+    "contact": "+370 351 224 5176"
+  },
+  {
+    "identity": "I00004",
+    "name": "Chryste",
+    "persondescription": "data provider",
+    "contact": "+81 308 988 7153"
+  },
+  {
+    "identity": "I00005",
+    "first_name": "Darcy",
+    "persondescription": "data provider",
+    "phone_number": "+54 398 559 0423"
+  },
+  {
+    "identity": "I00006",
+    "first_name": "Xylina",
+    "persondescription": "data provider",
+    "phone_number": "+7 690 597 4443"
+  },
+  {
+    "identity": "SP00002",
+    "first_name": "Roldan",
+    "persondescription": "service provider",
+    "phone_number": "+263 498 495 0617"
+  },
+  {
+    "identity": "SP00003",
+    "first_name": "Cob",
+    "persondescription": "service provider",
+    "phone_number": "+63 815 962 6097"
+  },
+  {
+    "identity": "SP00004",
+    "first_name": "Olag",
+    "persondescription": "service provider",
+    "phone_number": "+81 746 154 2598"
+  },
+  {
+    "identity": "SP00005",
+    "first_name": "Mandie",
+    "persondescription": "service provider",
+    "phone_number": "+261 860 539 4754"
+  },
+  {
+    "identity": "SP00006",
+    "first_name": "Elenore",
+    "persondescription": "service provider",
+    "phone_number": "+62 107 530 7500"
+  },
+  {
+    "identity": "DC00002",
+    "first_name": "Arber",
+    "persondescription": "data custodian",
+    "phone_number": "+265 498 495 0607"
+  },
+  {
+    "identity": "DC00003",
+    "first_name": "digime",
+    "persondescription": "data custodian",
+    "phone_number": "+63 885 982 6897"
+  },
+  {
+    "identity": "DC00004",
+    "first_name": "0penPDS",
+    "persondescription": "data custodian",
+    "phone_number": "+81 706 104 2008"
+  },
+  {
+    "identity": "DC00005",
+    "first_name": "hubofthings",
+    "persondescription": "data custodian",
+    "phone_number": "+231 830 539 4454"
+  },
+  {
+    "identity": "DC00006",
+    "first_name": "midata",
+    "persondescription": "data custodian",
+    "phone_number": "+62 197 590 7990"
+  }
+]

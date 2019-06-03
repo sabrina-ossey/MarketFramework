@@ -1,0 +1,37 @@
+    [
+        {
+          "datacustodian_name": "digime",
+          "product_datatitle": "electricity_data",
+          "sla": "delivery"
+        },
+       {
+          "datacustodian_name": "Arber",
+          "product_datatitle": "credit_card_transactions",
+          "sla": "delivery1"
+        },
+        {
+          "datacustodian_name": "digime",
+          "product_datatitle": "electricity_consumption",
+          "sla": "delivery2"
+        },
+        {
+          "datacustodian_name": "0penPDS",
+          "product_datatitle": "bus_transportation_data",
+          "sla": "delivery3"
+        },
+        {
+          "datacustodian_name": "hubofthings",
+          "product_datatitle": "taxi_transportation_data",
+          "sla": "delivery4"
+        },
+        {
+          "datacustodian_name": "midata",
+          "product_datatitle": "loyalty_scheme",
+          "sla": "delivery5"
+        },
+        {
+          "datacustodian_name": "digime",
+          "product_datatitle": "restaurant_location_data",
+          "sla": "delivery6"
+        }
+      ]
