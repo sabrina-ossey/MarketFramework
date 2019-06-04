@@ -4,12 +4,12 @@ admin:
   port: 9876
   host: localhost
 apiEndpoints:
-  api:
+  agreements:
     host: localhost
-    paths: '/ip'
+    paths: ['/agreements/register', '/agreements/*']
 serviceEndpoints:
-  httpbin:
-    url: 'https://httpbin.org'
+  agreements:
+    url: 'http://localhost:3000/'
 policies:
   - basic-auth
   - cors
@@ -20,13 +20,13 @@ policies:
   - proxy
   - rate-limit
 pipelines:
-  default:
+  agreements:
     apiEndpoints:
-      - api
+      - agreements
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
     # - key-auth:
       - proxy:
           - action:
-              serviceEndpoint: httpbin 
+              serviceEndpoint: agreements
               changeOrigin: true

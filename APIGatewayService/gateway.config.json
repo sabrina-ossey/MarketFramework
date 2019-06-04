@@ -1,0 +1,49 @@
+{
+	"http": {
+		"port": 8080
+	},
+	"admin": {
+		"port": 9876,
+		"host": "localhost"
+	},
+	"apiEndpoints": {
+		"agmt": {
+			"host": "localhost",
+			"paths": "/agreements/register"
+		}
+	},
+	"serviceEndpoints": {
+		"agreements": {
+			"url": "http://localhost:3000/"
+		}
+	},
+	"policies": [
+		"basic-auth",
+		"cors",
+		"expression",
+		"key-auth",
+		"log",
+		"oauth2",
+		"proxy",
+		"rate-limit"
+	],
+	"pipelines": [
+    {
+		"name":"agreements",
+			"apiEndpoints": [
+				"agmt"
+			],
+		"policies":
+				{
+					"proxy": [
+						{
+							"action": {
+							"serviceEndpoint": "agreements",
+              "changeOrigin": true
+						}
+          }
+				]
+			}
+  }
+]
+}
