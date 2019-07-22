@@ -15,7 +15,7 @@ const verifiedProofSchema = new mongoose.Schema({
     type: {type: String},
     anchorId: String,
     expectedValue: String,
-    verified: Boolean,
+    verified: String,
     verifiedAt: Date
   }]
 });

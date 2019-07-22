@@ -7,9 +7,7 @@ const mongoose = require('mongoose');
 const amqp = require('amqplib');
 
 
-const Transport = require('./transport');
-
-const transportRoutes = require('./routes');
+const Quantify = require('./quantify-self');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -18,7 +16,7 @@ app.use(bodyParser.json());
 let lastRequestId = 1;
 
 // handle a request
-app.post('/transport/sendData', async function (req, res){
+app.post('/quantify/sendData', async function (req, res){
   let requestId = lastRequestId;
   lastRequestId++;
 
@@ -90,14 +88,14 @@ function consume({ connection, channel, resultsChannel }) {
 
 
 // Connect to DB
-mongoose.connect('mongodb://localhost/transportation',  { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/quantify',  { useNewUrlParser: true })
  .then(() => console.log('MongoDB connected…'))
  .catch(err => console.log(err))
 
- app.get('/transport', (req, res, next) => {
-  Transport
+ app.get('/quantify', (req, res, next) => {
+  Quantify
   .find()
-  .select('journeyInstance TransactionDate Destination EndTime StartTime Origin')
+  //.select('journeyInstance TransactionDate Destination EndTime StartTime Origin')
   //.populate('journeyInstance','TransactionDate' )
   .exec()
   .then(docs =>{
@@ -106,11 +104,9 @@ mongoose.connect('mongodb://localhost/transportation',  { useNewUrlParser: true 
       transport: docs.map(doc =>{
         return {
           _id: doc._id,
-          journeyInstance: doc.journeyInstance,
-          TransactionDate: doc.TransactionDate,
           request:{
         type:'GET',
-        url:'http://localhost:3000/transport/' + doc._id
+        url:'http://localhost:3001/quantify/' + doc._id
       }
     }
     })
@@ -123,45 +119,6 @@ mongoose.connect('mongodb://localhost/transportation',  { useNewUrlParser: true 
   });
 });
 
-app.post('/transport', (req, res, next) => {
-  console.log(Transport);
-        const transport = new Transport({
-        _id: mongoose.Types.ObjectId(),
-        journeyInstance:  req.body.journeyInstance,
-        TransactionDate:  req.body.TransactionDate,
-        Destination:  req.body.Destination,
-        EndTime:  req.body.EndTime,
-        StartTime:  req.body.StartTime,
-        Origin:  req.body.Origin,
-      });
-      transport
-      .save()
-      .then(result => {
-        console.log(result);
-        res.status(201).json({
-          message:"Creating transport successfully",
-          createdTransport: { // perform mapping
-            journeyInstance:  result.journeyInstance,
-            TransactionDate: result.TransactionDate,
-            Destination:  result.Destination,
-            EndTime:  result.EndTime,
-            StartTime:  result.StartTime,
-            Origin:  result.Origin,
-            _id: result._id,
-            request: {
-              type: 'POST',
-              url: "http://localhost:3000/api/transports" + result._id
-            }
-          }
-        });
-      })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
-});
 
  app.use((req, res, next) => {
    const error = new Error('Not found');
