@@ -1,81 +1,68 @@
-const amqp = require('amqplib');
+﻿const express = require('express');
+const bodyParser = require('body-parser');
+const Custodian = require('./custodian');
 
-// RabbitMQ connection string
-const messageQueueConnectionString = process.env.CLOUDAMQP_URL;
+const app = express()
+var port = process.env.PORT || 3004;
 
-async function listenForMessages() {
-  // connect to Rabbit MQ
-  let connection = await amqp.connect('amqp://localhost');
+// Connect to DB
+mongoose.connect('mongodb://localhost/custodian',  { useNewUrlParser: true })
+ .then(() => console.log('MongoDB connected…'))
+ .catch(err => console.log(err))
 
-  // create a channel and prefetch 1 message at a time
-  let channel = await connection.createChannel();
-  await channel.prefetch(1);
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-  // create a second channel to send back the results
-  let resultsChannel = await connection.createConfirmChannel();
 
-  // start consuming messages
-  await consume({ connection, channel, resultsChannel });
-}
 
-// utility function to publish messages to a channel
-function publishToChannel(channel, { routingKey, exchangeName, data }) {
-  return new Promise((resolve, reject) => {
-    channel.publish(exchangeName, routingKey, Buffer.from(JSON.stringify(data), 'utf-8'), { persistent: true }, function (err, ok) {
-      if (err) {
-        return reject(err);
+app.post('/custodian', checkAuth, upload.single('productimage'), (req, res, next) => {
+  const custodian = new Custodian(request.body);
+  custodian
+  .save()
+  .then(result => {
+    console.log(result);
+    res.status(201).json({
+      result
       }
-
-      resolve();
-    })
-  });
-}
-
-// consume messages from RabbitMQ
-function consume({ connection, channel, resultsChannel }) {
-  return new Promise((resolve, reject) => {
-    channel.consume("processing.requests", async function (msg) {
-      // parse message
-      let msgBody = msg.content.toString();
-      let data = JSON.parse(msgBody);
-      let requestId = data.requestId;
-      let requestData = data.requestData;
-      console.log("Received a request message, requestId:", requestId);
-
-      // process data
-      let processingResults = await processMessage(requestData);
-
-      // publish results to channel
-      await publishToChannel(resultsChannel, {
-        exchangeName: "processing",
-        routingKey: "result",
-        data: { requestId, processingResults }
-      });
-      console.log("Published results for requestId:", requestId);
-
-      // acknowledge message as processed successfully
-      await channel.ack(msg);
     });
-
-    // handle connection closed
-    connection.on("close", (err) => {
-      return reject(err);
-    });
-
-    // handle errors
-    connection.on("error", (err) => {
-      return reject(err);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
     });
   });
-}
+});
 
-// simulate data processing that takes 5 seconds
-function processMessage(requestData) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(requestData + "-processed")
-    }, 5000);
+
+
+app.get('/custodian',(req, res, next) => {
+ Custodian
+ .find()
+ //.select('journeyInstance TransactionDate Destination EndTime StartTime Origin')
+ //.populate('journeyInstance','TransactionDate' )
+ .exec()
+ .then(docs =>{
+   res.status(200).json({
+     count: docs.length,
+     transport: docs.map(doc =>{
+       return {
+         _id: doc._id,
+         request:{
+       type:'GET',
+       url:'http://localhost:3004/custodian/' + doc._id
+     }
+   }
+   })
   });
-}
+ })
+ .catch(err => {
+   res.status(500).json({
+     error: err
+   });
+ });
+});
 
-listenForMessages();
+// start the server
+app.listen(port);
+console.log('Server started! At http://localhost:' + port);

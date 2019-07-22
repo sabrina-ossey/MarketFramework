@@ -1,0 +1,50 @@
+// External Dependancies
+const mongoose = require('mongoose');
+var SchemaTypes = mongoose.Schema.Types;
+
+const custodianSchema = new mongoose.Schema({
+  id: mongoose.Schema.Types.ObjectId,
+  startTime: Date,
+  dayOfWeek:Number,
+  isWeekday:Boolean,
+  isWeekend:Boolean,
+  caloriesBurned:Number,
+  caloriesBMR:Number,
+  stepsDistance:Number,
+  Elevation:Number,
+  restingHeartRate:Number,
+  floors:Number,
+  Minutessedentary:Number,
+  MinuteslightlyActive:Number,
+  MinutesFairlyActive:Number,
+  MinutesVeryActive:Number,
+  ActivityCalories:Number,
+  ActiveScore:Number,
+  CardioMinutes:Number,
+  Cardiocalories:SchemaTypes.Double,
+  FatBurnminutes:Number,
+  FatBurncalories:SchemaTypes.Double,
+  Peakminutes:Number,
+  Peakcalories:SchemaTypes.Double,
+  NormalCardiocalories:SchemaTypes.Double,
+  NormalCardiominutes:Number,
+  SleepEfficiency:Number,
+  MinutesAsleep:Number,
+  Minutestofallasleep:Number,
+  SleepStarttime:Date,
+  SleepEndtime:Date,
+  Timeinbed:Number,
+  minutesDeepsleep:Number,
+  Deepsleepcount:Number,
+  MinutesLightsleep:Number,
+  lightSleepCount:Number,
+  minutesREMsleep:Number,
+  REMsleepcount:Number,
+  minutesAwake:Number,
+  minutesAwakeCount:Number,
+  Deepsleep:Number,
+  Lightsleep:Number,
+  REMsleep:Number
+});
+
+module.exports = mongoose.model('Custodian', custodianSchema);
