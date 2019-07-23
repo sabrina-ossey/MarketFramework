@@ -7,9 +7,14 @@ apiEndpoints:
   agreements:
     host: localhost
     paths: ['/agreements/register', '/agreements/*']
+  hashing:
+    host: localhost
+    paths: ['/hashing/generateHash', '/hashings/*']
 serviceEndpoints:
   agreements:
     url: 'http://localhost:3000/'
+  hashing:
+    url: 'http://localhost:8080/'
 policies:
   - basic-auth
   - cors
@@ -30,3 +35,13 @@ pipelines:
           - action:
               serviceEndpoint: agreements
               changeOrigin: true
+  hashing:
+    apiEndpoints:
+      - hashing
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - proxy:
+        -action:
+          serviceEndpoint: hashing
+          changeOrigin: true
