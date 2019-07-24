@@ -1,19 +1,25 @@
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const app = express();
 const bodyParser = require('body-parser');
 // Require external modules
 const mongoose = require('mongoose');
 const amqp = require('amqplib');
+const fs = require('fs');
+var path = require('path');
 
+const PORT = 3001;
 
 const Quantify = require('./quantify-self');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+
 // simulate request IDs
 let lastRequestId = 1;
+
+
 
 // handle a request
 app.post('/quantify/sendData', async function (req, res){
@@ -135,21 +141,21 @@ mongoose.connect('mongodb://localhost/quantify',  { useNewUrlParser: true })
    });
  });
 
- app.get('/', function(req, res) {
-    res.send('Vous êtes à l\'accueil');
-});
 
-const PORT = 3001;
-
-server = http.createServer(app);
-server.listen(PORT, "localhost", function(err) {
-  if(err) {
-    consolde.error(err);
-  } else {
-    console.info("listening on port %s.", PORT);
-  }
+app.get ('/', (req, res) => {
+  res.send('hello Https!')
+  console.log('test');
 });
 
 
  //listen for results on RabbitMQ
  listenForResults();
+
+// start the https server
+
+https.createServer({
+  key: fs.readFileSync(path.resolve(__dirname, 'keys/client.key')),
+  cert: fs.readFileSync(path.resolve(__dirname, 'keys/client.crt'))
+}, app).listen(PORT, () => {
+  console.log('Server started! At http://localhost:' + PORT);
+});

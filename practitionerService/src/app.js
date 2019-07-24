@@ -1,5 +1,9 @@
+const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const fs = require('fs');
+var path = require('path');
 
 const Practitionner = require('./practitionner');
 
@@ -16,10 +20,7 @@ app.post('/practitionner', (req, res, next) => {
   .save()
   .then(result => {
     console.log(result);
-    res.status(201).json({
-      result
-      }
-    });
+    res.status(201).json({result});
   })
   .catch(err => {
     console.log(err);
@@ -27,8 +28,6 @@ app.post('/practitionner', (req, res, next) => {
       error: err
     });
   });
-});
-
 });
 
 // Connect to DB
@@ -39,9 +38,14 @@ mongoose.connect('mongodb://localhost/custodian',  { useNewUrlParser: true })
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+app.get ('/', (req, res) => {
+  res.send('hello Https!')
+});
 
-
-
-// start the server
-app.listen(port);
-console.log('Server started! At http://localhost:' + port);
+// start the HTTPS server
+https.createServer({
+  key: fs.readFileSync(path.resolve(__dirname, 'keys/client.key')),
+  cert: fs.readFileSync(path.resolve(__dirname, 'keys/clientP.crt'))
+}, app).listen(port, () => {
+  console.log('Server started! At http://localhost:' + port);
+});
