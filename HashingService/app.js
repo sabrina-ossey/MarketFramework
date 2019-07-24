@@ -24,8 +24,8 @@ function generateHash(element) {
 
 // an Element can be an agreement, a transaction or an event
 function signHash(element) {
-	
-	return crypto.createHash('sha256').update(jsonElement).digest('hex');
+
+	return signHashElement;
 
 }
 

@@ -77,8 +77,8 @@ app.get ('/', (req, res) => {
 // start the https server
 
 https.createServer({
-  key: fs.readFileSync(path.resolve(__dirname, 'keys/server.key')),
-  cert: fs.readFileSync(path.resolve(__dirname, 'keys/server.cert'))
+  key: fs.readFileSync(path.resolve(__dirname, 'keys/client.key')),
+  cert: fs.readFileSync(path.resolve(__dirname, 'keys/client.crt'))
 }, app).listen(port, () => {
   console.log('Server started! At http://localhost:' + port);
 });
