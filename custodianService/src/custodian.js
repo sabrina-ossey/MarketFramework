@@ -1,6 +1,5 @@
 // External Dependancies
 const mongoose = require('mongoose');
-var SchemaTypes = mongoose.Schema.Types;
 
 const custodianSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,
@@ -21,12 +20,12 @@ const custodianSchema = new mongoose.Schema({
   ActivityCalories:Number,
   ActiveScore:Number,
   CardioMinutes:Number,
-  Cardiocalories:SchemaTypes.Double,
+  Cardiocalories:Number,
   FatBurnminutes:Number,
-  FatBurncalories:SchemaTypes.Double,
+  FatBurncalories:Number,
   Peakminutes:Number,
-  Peakcalories:SchemaTypes.Double,
-  NormalCardiocalories:SchemaTypes.Double,
+  Peakcalories:Number,
+  NormalCardiocalories:Number,
   NormalCardiominutes:Number,
   SleepEfficiency:Number,
   MinutesAsleep:Number,

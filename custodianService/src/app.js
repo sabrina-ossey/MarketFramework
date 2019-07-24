@@ -1,8 +1,13 @@
-﻿const express = require('express');
+const https = require('https');
+const express = require('express');
 const bodyParser = require('body-parser');
 const Custodian = require('./custodian');
+const mongoose = require('mongoose');
+const fs = require('fs');
+var path = require('path');
 
-const app = express()
+
+const app = express();
 var port = process.env.PORT || 3004;
 
 // Connect to DB
@@ -15,7 +20,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 
-app.post('/custodian', checkAuth, upload.single('productimage'), (req, res, next) => {
+
+
+
+
+app.post('/custodian', (req, res, next) => {
   const custodian = new Custodian(request.body);
   custodian
   .save()
@@ -23,9 +32,8 @@ app.post('/custodian', checkAuth, upload.single('productimage'), (req, res, next
     console.log(result);
     res.status(201).json({
       result
-      }
     });
-  })
+    })
   .catch(err => {
     console.log(err);
     res.status(500).json({
@@ -33,7 +41,6 @@ app.post('/custodian', checkAuth, upload.single('productimage'), (req, res, next
     });
   });
 });
-
 
 
 app.get('/custodian',(req, res, next) => {
@@ -63,6 +70,15 @@ app.get('/custodian',(req, res, next) => {
  });
 });
 
-// start the server
-app.listen(port);
-console.log('Server started! At http://localhost:' + port);
+app.get ('/', (req, res) => {
+  res.send('hello Https!')
+});
+
+// start the https server
+
+https.createServer({
+  key: fs.readFileSync(path.resolve(__dirname, 'keys/server.key')),
+  cert: fs.readFileSync(path.resolve(__dirname, 'keys/server.cert'))
+}, app).listen(port, () => {
+  console.log('Server started! At http://localhost:' + port);
+});
