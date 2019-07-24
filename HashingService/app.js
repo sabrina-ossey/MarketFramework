@@ -1,14 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const PRE = require('bm-pre');
+const request = require('request');
+const mongoose = require('mongoose');
+//const PRE = require('bm-pre');
 
 
 var crypto = require('crypto');
 const fs = require('fs');
 
 const app = express()
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8000;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -22,18 +23,30 @@ function generateHash(element) {
 }
 
 
-app.get('/api/generateHash', function(req, res){
-  let rawdata = fs.readFileSync('AgreementExchange.json');
-  let agreement = JSON.parse(rawdata);
-  console.log(agreement);
-  let hashedElement = generateHash(agreement);
+app.get('/hashing/generateHash', function(req, res){
+	var id =  req.body.id;
+	var id = mongoose.Types.ObjectId(id);
+//	var agreementid = mongoose.Types.ObjectId(id);
+	console.log(id);
+	/*if (!mongoose.Types.ObjectId.isValid(id)) {
+    id = id.replace(/\s/g, '');
+  } */
+	request.get('http://localhost:8080/agreements/' + id, function (error, response, body) {
+//  console.log('error:', error); // Print the error if one occurred
+//  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//  console.log('body:', body); // Print the HTML for the Google homepage.
+	console.log(body);
+	var obj = JSON.parse(body);
+	var agreement = obj.token;
+	let hashedElement = generateHash(agreement);
   console.log(hashedElement);
-  res.send(hashedElement);
+	res.send(hashedElement);
+});
+
 });
 
 
-
-app.get('/api/generateKey', function(req, res){
+/*app.get('/hashing/generateKey', function(req, res){
 	console.log("initializing PRE...")
 	PRE.init({g: "The generator for G1", h: "The generator for G2", returnHex: false}).then(params => {
 	    const plain = PRE.randomGen();
@@ -45,7 +58,7 @@ app.get('/api/generateKey', function(req, res){
 		})
 	//	console.log("generateKey called")
 
-	})
+}) */
 
 // start the server
 app.listen(port);

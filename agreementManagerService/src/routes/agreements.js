@@ -46,7 +46,7 @@ router.post('/register', (req, res) => {
 
 router.get('/:agreementId',(req, res, next) => {
   const id = req.params.agreementId;
-  Agreement.findById(id).select('description')
+  Agreement.findById(id)//.select('description')
      .exec()
      .then(agreement =>{
        console.log("From database", agreement);
