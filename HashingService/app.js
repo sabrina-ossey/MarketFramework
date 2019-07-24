@@ -26,15 +26,12 @@ function generateHash(element) {
 app.get('/hashing/generateHash', function(req, res){
 	var id =  req.body.id;
 	var id = mongoose.Types.ObjectId(id);
-//	var agreementid = mongoose.Types.ObjectId(id);
+
 	console.log(id);
-	/*if (!mongoose.Types.ObjectId.isValid(id)) {
-    id = id.replace(/\s/g, '');
-  } */
+
 	request.get('http://localhost:8080/agreements/' + id, function (error, response, body) {
-//  console.log('error:', error); // Print the error if one occurred
-//  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//  console.log('body:', body); // Print the HTML for the Google homepage.
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 	console.log(body);
 	var obj = JSON.parse(body);
 	var agreement = obj.token;
