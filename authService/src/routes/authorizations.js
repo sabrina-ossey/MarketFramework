@@ -120,6 +120,13 @@ router.get('/:tokenId',(req, res, next) => {
      });
 });
 
-
+function verifyHash(element, publicKey, signature) {
+	const verify = crypto.createVerify('sha256');
+	verify.update('some data to sign');
+	verify.end();
+	const verifiedSignature =verify.verify(publicKey, signature);
+	console.log(verifiedSignature); // Print: true or false
+	return verifiedSignature;
+}
 
 module.exports = router;

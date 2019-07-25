@@ -4,7 +4,8 @@ var express = require('express'),
 	cors = require('cors'),
 	OAuth2Server = require('oauth2-server'),
 	Request = OAuth2Server.Request,
-	Response = OAuth2Server.Response;
+	Response = OAuth2Server.Response,
+	https = require('https');
 
   var app = express();
 
@@ -41,14 +42,10 @@ mongoose.connect(mongoUri, {
 
 const userRoutes = require('./routes/users');
 const authorizationRoutes = require('./routes/authorizations');
-const templateRoutes = require('./routes/templates');
-const agreementsRoutes = require('./routes/agreements');
 
 // Routes handle REST API request
 app.use('/users', userRoutes);
 app.use('/authorizations', authorizationRoutes);
-app.use('/templates', templateRoutes);
-app.use('/agreements', agreementsRoutes);
 
 
 app.get('/', function (req, res) {

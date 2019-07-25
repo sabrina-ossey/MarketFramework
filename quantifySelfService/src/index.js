@@ -1,13 +1,13 @@
 const express = require('express');
 const https = require('https');
-const app = express();
 const bodyParser = require('body-parser');
-// Require external modules
 const mongoose = require('mongoose');
 const amqp = require('amqplib');
 const fs = require('fs');
 var path = require('path');
+const eventEmitter = require('events').EventEmitter()
 
+const app = express();
 const PORT = 3001;
 
 const Quantify = require('./quantify-self');

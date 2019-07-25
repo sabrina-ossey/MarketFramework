@@ -29,15 +29,6 @@ function signHash(element, privateKey) {
 	return signature;
 }
 
-function verifyHash(element, publicKey, signature) {
-	const verify = crypto.createVerify('sha256');
-	verify.update('some data to sign');
-	verify.end();
-	const verifiedSignature =verify.verify(publicKey, signature);
-	console.log(verifiedSignature); // Print: true or false
-	return verifiedSignature;
-}
-
 
 
 app.get('/hashing/generateHash', function(req, res){
