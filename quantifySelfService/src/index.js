@@ -18,83 +18,6 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 
-// simulate request IDs
-let lastRequestId = 1;
-
-
-
-// handle a request
-app.post('/quantify/sendData', async function (req, res){
-  let requestId = lastRequestId;
-  lastRequestId++;
-
-  let connection = await amqp.connect('amqp://localhost');
-  let channel = await connection.createConfirmChannel();
-
-//publishthe data to RabbitMQ
-
-let requestData = req.body.data;
-console.log("Published a request message, requestedId:", requestId)
-await publishToChannel(channel, { routingKey: "request", exchangeName:"processing", data: {requestId, requestData}});
-
-res.send({ requestId});
-
-});
-
-// utility function to publish messages to a channel
-function publishToChannel(channel, { routingKey, exchangeName, data }) {
-  return new Promise((resolve, reject) => {
-    channel.publish(exchangeName, routingKey, Buffer.from(JSON.stringify(data), 'utf-8'), { persistent: true }, function (err, ok) {
-      if (err) {
-        return reject(err);
-      }
-
-      resolve();
-    })
-  });
-}
-
-async function listenForResults() {
-  // connect to Rabbit MQ
-  let connection = await amqp.connect('amqp://localhost');
-
-  // create a channel and prefetch 1 message at a time
-  let channel = await connection.createChannel();
-  await channel.prefetch(1);
-
-  // start consuming messages
-  await consume({ connection, channel });
-}
-
-
-// consume messages from RabbitMQ
-function consume({ connection, channel, resultsChannel }) {
-  return new Promise((resolve, reject) => {
-    channel.consume("processing.results", async function (msg) {
-      // parse message
-      let msgBody = msg.content.toString();
-      let data = JSON.parse(msgBody);
-      let requestId = data.requestId;
-      let processingResults = data.processingResults;
-      console.log("Received a result message, requestId:", requestId, "processingResults:", processingResults);
-
-      // acknowledge message as received
-      await channel.ack(msg);
-    });
-
-    // handle connection closed
-    connection.on("close", (err) => {
-      return reject(err);
-    });
-
-    // handle errors
-    connection.on("error", (err) => {
-      return reject(err);
-    });
-  });
-}
-
-
 // Connect to DB
 mongoose.connect('mongodb://localhost/quantify',  { useNewUrlParser: true })
  .then(() => console.log('MongoDB connected…'))
@@ -154,41 +77,6 @@ app.get ('/', (req, res) => {
  listenForResults();
 
 // start the https server
-
-//// INITILIZEDS with mockdata
-
-
-function populateIntoMongodb() {
-	// clear all existing documents from the collections
-	Quantify.find().remove();
-
-
-	// populate the foods collection from json data
-	// nothing fancy here as Food documents do not reference anything else
-	for( var i = 0; i < quantifyData.length; i++ ) {
-		new Quantify( quantifyData[ i ] ).save();
-	}
-
-	// now that the collection is populated we iterate over it
-	quantifyData.find( function( err, quantifies ) {
-		var quantifyMap = {};
-
-		// store _ids of Quantify documents that Mongo generated upon insert
-		for( var i = 0; i < quantifies.length; i++ ) {
-			var quantify = quantifies[i];
-			// I am mapping the ids to the quantify names because the LogEntry
-			// JSON data contained this field thanks to the original source
-			// data's structure (a spreadsheet).
-			// You could utilize a more sophisticated lookup here if necessary.
-			quantifyMap[ quantify.name ] = quantify._id;
-		}
-	} );
-};
-
-
-
-
-//////////////////////////////////
 
 https.createServer({
   key: fs.readFileSync(path.resolve(__dirname, 'keys/client.key')),
