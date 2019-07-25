@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const mongoose = require('mongoose');
 //const PRE = require('bm-pre');
-
-
 var crypto = require('crypto');
 const fs = require('fs');
 
@@ -22,12 +20,24 @@ function generateHash(element) {
 
 }
 
-// an Element can be an agreement, a transaction or an event
-function signHash(element) {
-
-	return signHashElement;
-
+// an Element can be an agreement, a transaction or an event hash
+function signHash(element, privateKey) {
+	const sign = crypto.creatSign('sha256');
+	sign.update('some data to sign');
+	sign.end();
+	const signature = sign.sign(privateKey);
+	return signature;
 }
+
+function verifyHash(element, publicKey, signature) {
+	const verify = crypto.createVerify('sha256');
+	verify.update('some data to sign');
+	verify.end();
+	const verifiedSignature =verify.verify(publicKey, signature);
+	console.log(verifiedSignature); // Print: true or false
+	return verifiedSignature;
+}
+
 
 
 app.get('/hashing/generateHash', function(req, res){
