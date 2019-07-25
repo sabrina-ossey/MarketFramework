@@ -7,4 +7,4 @@ const clientSchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('User', clientSchema);
+module.exports = mongoose.model('client', clientSchema);
