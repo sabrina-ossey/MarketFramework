@@ -30,9 +30,9 @@ mongoose.connect('mongodb://localhost/quantify',  { useNewUrlParser: true })
   //.populate('journeyInstance','TransactionDate' )
   .exec()
   .then(docs =>{
-    res.status(200).json({
+    res.status(200).json(docs);/*{
       count: docs.length,
-      transport: docs.map(doc =>{
+      quantify: docs.map(doc =>{
         return {
           _id: doc._id,
           request:{
@@ -41,7 +41,7 @@ mongoose.connect('mongodb://localhost/quantify',  { useNewUrlParser: true })
       }
     }
     })
-   });
+  });*/
   })
   .catch(err => {
     res.status(500).json({
@@ -71,10 +71,6 @@ app.get ('/', (req, res) => {
   res.send('hello Https!')
   console.log('test');
 });
-
-
- //listen for results on RabbitMQ
- listenForResults();
 
 // start the https server
 

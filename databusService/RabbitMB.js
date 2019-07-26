@@ -1,9 +1,17 @@
 const amqp = require('amqplib');
+const eventEmitter = require('events').EventEmitter();
 
-const eventEmitter = require('events').EventEmitter()
 
-// simulate request IDs
-let lastRequestId = 1;
+// SEND MESSAGE
+
+amqp.connect('amqp://localhost', function(error0, connection) {
+  if (error0) {
+    throw error0;
+  }
+  connection.createChannel(function(error1, channel) {});
+});
+
+/* let lastRequestId = 1;
 
 
 
@@ -76,4 +84,4 @@ function consume({ connection, channel, resultsChannel }) {
       return reject(err);
     });
   });
-}
+} */
