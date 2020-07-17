@@ -13,6 +13,6 @@
     "chainpoint-client": "^0.3.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   }
 }
